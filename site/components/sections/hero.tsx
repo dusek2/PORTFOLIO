@@ -49,7 +49,7 @@ export function HeroSection() {
         >
           <div className="relative w-[400px] h-[400px] rounded-full overflow-hidden border-4 border-primary/10">
             <Image
-              src="https://raw.githubusercontent.com/dusek2/portfolio/main/public/profile2.jpg"
+              src="https://github.com/dusek2/PORTFOLIO/blob/main/site/assets/IMG_7097.JPG?raw=true"
               alt="Kamil Dusejovsky"
               fill
               className="object-cover"

@@ -11,7 +11,7 @@ const projects = [
     title: 'Cryptocurrency Price Prediction',
     description: 'Machine learning model for predicting cryptocurrency prices using over a decade of historical data.',
     icon: Brain,
-    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800&auto=format&fit=crop&q=60',
+    image: 'https://github.com/dusek2/PORTFOLIO/blob/main/site/assets/traxer-kM6QNrgo0YE-unsplash%20(1).jpg?raw=true',
     tags: ['Python', 'PyTorch', 'Machine Learning', 'Data Analysis'],
     details: [
       'Implemented LSTM neural networks for temporal analysis',
@@ -26,7 +26,7 @@ const projects = [
     title: 'LifeQuest',
     description: 'Gamified personal development web application with goal tracking and interactive features.',
     icon: Trophy,
-    image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&auto=format&fit=crop&q=60',
+    image: 'https://github.com/dusek2/PORTFOLIO/blob/main/site/assets/filip-filkovic-philatz-7LixK7qc_kM-unsplash.jpg?raw=true',
     tags: ['React', 'Node.js', 'AWS', 'Express'],
     details: [
       'Led team of 9 developers',
