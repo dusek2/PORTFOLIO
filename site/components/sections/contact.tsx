@@ -6,8 +6,46 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Mail, Send } from 'lucide-react';
+import { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 export function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState('');
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const result = await emailjs.send(
+        '', // Replace with your EmailJS Service ID
+        '', // Replace with your EmailJS Template ID
+        formData,
+        '' // Replace with your EmailJS User ID
+      );
+      console.log(result.text);
+      setFeedback('Message sent successfully!');
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      setFeedback('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+      setFormData({ name: '', email: '', message: '' });
+    }
+  };
+
   return (
     <section id="contact" className="py-20">
       <motion.div
@@ -20,23 +58,42 @@ export function Contact() {
         <h2 className="text-3xl font-bold text-center mb-12">Get In Touch</h2>
         <div className="grid gap-8 lg:grid-cols-2">
           <Card className="p-6">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <Input placeholder="Name" />
+                <Input
+                  placeholder="Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
               <div className="space-y-2">
-                <Input type="email" placeholder="Email" />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
               <div className="space-y-2">
                 <Textarea
                   placeholder="Message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   className="min-h-[150px]"
+                  required
                 />
               </div>
-              <Button className="w-full">
-                <Send className="w-4 h-4 mr-2" /> Send Message
+              <Button className="w-full" type="submit" disabled={isSubmitting}>
+                <Send className="w-4 h-4 mr-2" />
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
+            {feedback && <p className="text-center mt-4">{feedback}</p>}
           </Card>
           <div className="space-y-6">
             <Card className="p-6">
