@@ -11,7 +11,7 @@ import emailjs from 'emailjs-com';
 
 export function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
+    name: ,
     email: '',
     message: '',
   });
@@ -30,10 +30,10 @@ export function Contact() {
 
     try {
       const result = await emailjs.send(
-        '', // Replace with your EmailJS Service ID
-        '', // Replace with your EmailJS Template ID
+        import.meta.env.VITE_EMAILJS_SERVICE_ID as string, // Replace with your EmailJS Service ID
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // Replace with your EmailJS Template ID
         formData,
-        '' // Replace with your EmailJS User ID
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY // Replace with your EmailJS User ID
       );
       console.log(result.text);
       setFeedback('Message sent successfully!');
