@@ -11,7 +11,7 @@ import emailjs from 'emailjs-com';
 
 export function Contact() {
   const [formData, setFormData] = useState({
-    name: ,
+    name: '',
     email: '',
     message: '',
   });
