@@ -35,7 +35,6 @@ export function Contact() {
         formData,
         '' // Replace with your EmailJS User ID
       );
-      console.log(result.text);
       setFeedback('Message sent successfully!');
     } catch (error) {
       console.error('Failed to send message:', error);
