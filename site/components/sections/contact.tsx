@@ -9,7 +9,6 @@ import { Github, Linkedin, Mail, Send } from 'lucide-react';
 import { useState } from 'react';
 import emailjs from 'emailjs-com';
 
-
 export function Contact() {
 
   const [formData, setFormData] = useState({
@@ -21,12 +20,12 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState('');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
