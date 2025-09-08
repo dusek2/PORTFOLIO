@@ -56,54 +56,166 @@ export function Projects() {
             return (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.7, 
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15
+                }}
                 viewport={{ once: true }}
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.3 }
+                }}
               >
-                <Card className="h-full">
-                  <div className="aspect-[4/1] relative overflow-hidden">
-                    <img
+                <Card className="h-full overflow-hidden border-2 hover:border-primary/30 transition-all duration-300 bg-gradient-to-br from-background to-background/80 backdrop-blur-sm">
+                  <motion.div 
+                    className="aspect-[4/1] relative overflow-hidden"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.img
                       src={project.image}
                       alt={project.title}
-                      className="object-contain w-full h-full transition-transform hover:scale-105 bg-gray-50"
+                      className="object-contain w-full h-full bg-gradient-to-br from-gray-50 to-gray-100"
+                      initial={{ scale: 1.1, opacity: 0.8 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.3 }
+                      }}
                     />
-                    <div className="absolute top-4 right-4 bg-background/90 p-2 rounded-full">
+                    <motion.div 
+                      className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm p-2 rounded-full shadow-lg border"
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      transition={{ 
+                        delay: index * 0.2 + 0.5,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        rotate: 5,
+                        transition: { duration: 0.2 }
+                      }}
+                    >
                       <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                  </div>
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <CardTitle className="text-xl">{project.title}</CardTitle>
-                        <p className="text-sm text-muted-foreground mt-1">{project.period}</p>
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.2 + 0.4 }}
+                  >
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <motion.h3 
+                            className="text-xl font-bold"
+                            whileHover={{ scale: 1.05, color: "hsl(var(--primary))" }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {project.title}
+                          </motion.h3>
+                          <motion.p 
+                            className="text-sm text-muted-foreground mt-1"
+                            whileHover={{ opacity: 0.8 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {project.period}
+                          </motion.p>
+                        </div>
                       </div>
-                    </div>
-                    <CardDescription className="mt-2">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                        {project.details.map((detail, i) => (
-                          <li key={i}>{detail}</li>
-                        ))}
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary">
-                            {tag}
-                          </Badge>
-                        ))}
+                      <motion.p 
+                        className="mt-2 text-muted-foreground"
+                        whileHover={{ opacity: 0.9 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {project.description}
+                      </motion.p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <motion.ul 
+                          className="list-disc list-inside space-y-1 text-sm text-muted-foreground"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ delay: index * 0.2 + 0.6 }}
+                        >
+                          {project.details.map((detail, i) => (
+                            <motion.li 
+                              key={i}
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.2 + 0.7 + i * 0.1 }}
+                              whileHover={{ x: 5, color: "hsl(var(--primary))" }}
+                            >
+                              {detail}
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                        <motion.div 
+                          className="flex flex-wrap gap-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.2 + 0.8 }}
+                        >
+                          {project.tags.map((tag, tagIndex) => (
+                            <motion.div
+                              key={tag}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: index * 0.2 + 0.9 + tagIndex * 0.1 }}
+                              whileHover={{ 
+                                scale: 1.1,
+                                y: -2,
+                                transition: { duration: 0.2 }
+                              }}
+                            >
+                              <Badge 
+                                variant="secondary" 
+                                className="cursor-pointer hover:bg-primary/10 transition-colors duration-200"
+                              >
+                                {tag}
+                              </Badge>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                        <motion.div 
+                          className="flex gap-4 pt-4"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.2 + 1.0 }}
+                        >
+                          <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <Button asChild variant="default" className="relative overflow-hidden group">
+                              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                <motion.div
+                                  className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"
+                                  initial={{ x: "-100%" }}
+                                  whileHover={{ x: "100%" }}
+                                  transition={{ duration: 0.6 }}
+                                />
+                                <ExternalLink className="w-4 h-4 mr-2 relative z-10" />
+                                <span className="relative z-10">Visit Website</span>
+                              </a>
+                            </Button>
+                          </motion.div>
+                        </motion.div>
                       </div>
-                      <div className="flex gap-4 pt-4">
-                        <Button asChild variant="default">
-                          <a href={project.github} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-4 h-4 mr-2" /> Visit Website
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
+                    </CardContent>
+                  </motion.div>
                 </Card>
               </motion.div>
             );
